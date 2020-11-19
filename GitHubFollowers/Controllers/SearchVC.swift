@@ -12,6 +12,8 @@ class SearchVC: UIViewController {
    let logoImageView = UIImageView()
     let usernameTextField = GFTextField()
     let callToActionButton = GFButton(background: .systemGreen, title: "Get Followers")
+    
+    var isUsernameEntered: Bool { return !usernameTextField.text!.isEmpty }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +21,7 @@ class SearchVC: UIViewController {
         configureLogoImageView()
         configureUsernameTextField()
         configureCallToActionButton()
-        
+        createDismissKeyboardTapGesture()
     }
     
     // Code that happens everytime the view appears
@@ -27,6 +29,26 @@ class SearchVC: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
     }
+    
+    
+    func createDismissKeyboardTapGesture() {
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func pushFollowerListVC() {
+        guard isUsernameEntered else { 
+           presentGFAlertOnMainThread(title: "Empty Username", message: "Please enter a username, we need to know who to find 😁", buttonTitle: "Okay")
+            return
+            }
+        let followerListVC = FollowersListVC()
+        followerListVC.username = usernameTextField.text
+        followerListVC.title = usernameTextField.text
+        navigationController?.pushViewController(followerListVC, animated: true)
+        
+        
+    }
+    
     
     func configureLogoImageView() {
         view.addSubview(logoImageView)
@@ -43,6 +65,9 @@ class SearchVC: UIViewController {
     
     func configureUsernameTextField() {
         view.addSubview(usernameTextField)
+        usernameTextField.delegate = self
+        
+        callToActionButton.addTarget(self, action: #selector(pushFollowerListVC), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             usernameTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 48),
@@ -67,4 +92,11 @@ class SearchVC: UIViewController {
 
 
 
+}
+
+extension SearchVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        pushFollowerListVC()
+        return true
+    }
 }
