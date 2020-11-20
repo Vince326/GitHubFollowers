@@ -4,3 +4,4 @@
 # Utilizes programmable UI (No Storyboard)
 # No 3rd party API's
 # Search screen feature and UICollectionView
+This also has a custom UI for the alert that pops up when there has been no user entered.
