@@ -7,4 +7,4 @@
 This also has a custom UI for the alert that pops up when there has been no user entered.
 Uses network calls for accessing follower data and information.
 Uses UItabBarController to have searchVC and favorites VC as two different screens.
-# Current work in progress
+# Currently a work in progress
