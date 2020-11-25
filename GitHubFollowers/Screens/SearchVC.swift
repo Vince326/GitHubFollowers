@@ -27,7 +27,8 @@ class SearchVC: UIViewController {
     // Code that happens everytime the view appears
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        
     }
     
     
@@ -38,7 +39,7 @@ class SearchVC: UIViewController {
     
     @objc func pushFollowerListVC() {
         guard isUsernameEntered else { 
-           presentGFAlertOnMainThread(title: "Empty Username", message: "Please enter a username, we need to know who to find 😁", buttonTitle: "Okay")
+           presentGFAlertOnMainThread(title: "Empty Username", message: "Please enter a username, we need to know who to find 😁", buttonTitle: "OK")
             return
             }
         let followerListVC = FollowersListVC()
