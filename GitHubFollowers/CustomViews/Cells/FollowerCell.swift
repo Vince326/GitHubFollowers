@@ -8,7 +8,7 @@
 import UIKit
 
 class FollowerCell: UICollectionViewCell {
-    static let resueId = "FollowerCell"
+    static let reuseId = "FollowerCell"
     
     let avatarImageView = GFAvatarImageView(frame: .zero)
     let usernameLbl = GFTitleLabel(TextAlignment: .center, fontSize: 16)
@@ -17,7 +17,6 @@ class FollowerCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
-        configureViewController()
         
     }
     
@@ -50,9 +49,7 @@ class FollowerCell: UICollectionViewCell {
         
     }
     
-    configureViewController() {
-        
-    }
+    
     
     
     

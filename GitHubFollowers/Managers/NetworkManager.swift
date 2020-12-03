@@ -10,7 +10,7 @@ import Foundation
 class NetworkManager {
     
     static let shared = NetworkManager()
-    let baseUrl = "https://api.guthub.com/users/"
+    let baseUrl = "https://api.github.com/users/"
     
     private init(){
         
@@ -28,7 +28,7 @@ class NetworkManager {
             if let _ = error {
                 completed(.failure(.unableToComplete))
             }
-            
+            // Returns the repsonse as data and the status code or displays the error.
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                 completed(.failure(.invalidResponse))
                 return
